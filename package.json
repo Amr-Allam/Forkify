@@ -1,0 +1,25 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe Application",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amr-Allam/Forkify.git"
+  },
+  "keywords": [],
+  "author": "Amr Allam",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Amr-Allam/Forkify/issues"
+  },
+  "homepage": "https://github.com/Amr-Allam/Forkify#readme",
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "parcel": "^2.16.0"
+  }
+}
