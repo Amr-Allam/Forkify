@@ -15,11 +15,17 @@ const timeout = function (s) {
 };
 
 const recipeContainer = document.querySelector(".recipe");
+const searchBar = document.querySelector(".search-bar");
+const searchButton = document.querySelector(".search-button");
 
-const getRecipe = async function () {
+const getRecipe = async function (e) {
+  e.preventDefault();
+  const searchValue = searchBar.value;
+
   try {
     const res = await fetch(
       "https://forkify-api.jonas.io/api/v2/recipes/5ed6604591c37cdc054bc886"
+      // `https://forkify-api.jonas.io/api/v2/recipes?search=${searchValue}`
     );
     const data = await res.json();
 
@@ -27,22 +33,22 @@ const getRecipe = async function () {
 
     console.log(res, data);
 
-    let { recipe } = data.data;
-    console.log(recipe);
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
-    console.log(recipe);
+    // let { recipe } = data.data;
+    // console.log(recipe);
+    // recipe = {
+    //   id: recipe.id,
+    //   title: recipe.title,
+    //   publisher: recipe.publisher,
+    //   sourceUrl: recipe.source_url,
+    //   image: recipe.image_url,
+    //   servings: recipe.servings,
+    //   cookingTime: recipe.cooking_time,
+    //   ingredients: recipe.ingredients,
+    // };
+    // console.log(recipe);
   } catch (err) {
     alert(err);
   }
 };
 
-getRecipe();
+searchButton.addEventListener("click", getRecipe);
