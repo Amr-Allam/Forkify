@@ -6,6 +6,7 @@
 
 :root {
   --primary-color: #f9f5f3;
+  --secondary-color: #f38e82;
   --primary-gradient: linear-gradient(to right bottom, #fbdb89, #f48982);
 }
 
@@ -40,6 +41,9 @@ input {
 }
 li {
   list-style: none;
+}
+a {
+  text-decoration: none;
 }
 
 .container {
@@ -79,8 +83,10 @@ li {
 .search-form .search-bar {
   padding-left: 2rem;
   background: none;
-  min-width: 30ch;
+  min-width: 28ch;
+  flex: 1;
   color: #615551;
+  font-size: 1.2rem;
 }
 .search-form .search-bar::placeholder {
   color: #d3c7c3;
@@ -115,7 +121,7 @@ li {
 .header .nav-item button svg {
   width: 2rem;
   height: 2rem;
-  fill: #f38e82;
+  fill: var(--secondary-color);
   margin-right: 0.3rem;
   transform: translateY(-1px);
 }
@@ -130,7 +136,36 @@ li {
 .content .search-results {
   background-color: white;
   flex: 1;
+  padding: 2rem 0;
 }
+.search-results .result {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s;
+}
+.search-results .result:hover {
+  background-color: #f9f5f3;
+  transform: translateY(-2px);
+}
+.result .result-icon {
+  height: 4rem;
+  width: 4rem;
+}
+.result .result-details {
+  text-transform: uppercase;
+}
+.result-details h4 {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  color: var(--secondary-color);
+}
+.result-details p {
+  font-size: 0.8rem;
+  color: #918581;
+}
+
 .content .recipe {
   background-color: var(--primary-color);
   flex: 2;
