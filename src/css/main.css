@@ -17,7 +17,7 @@ body {
   color: #615551;
   background-image: var(--primary-gradient);
   padding: 3rem;
-  height: 100dvh;
+  min-height: 100dvh;
 }
 
 button {
@@ -46,14 +46,35 @@ a {
   text-decoration: none;
 }
 
+.spinner {
+  margin: 3rem auto;
+  text-align: center;
+}
+.spinner svg {
+  width: 3rem;
+  height: 3rem;
+  fill: var(--secondary-color);
+  animation: rotate 2s infinite linear;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* ----------------------------------------------------- */
+
 .container {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 9px;
   overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba(97, 85, 81, 0.2);
 }
+/* ------------------ HEADER ------------------ */
 .container .header {
   background-color: var(--primary-color);
   padding: 0 2rem;
@@ -62,11 +83,12 @@ a {
   align-items: center;
   gap: 2rem;
 }
-
+/* Logo */
 .header .logo {
   display: block;
   height: 3rem;
 }
+/* Search */
 .header .search-form {
   background-color: white;
   display: flex;
@@ -91,7 +113,6 @@ a {
 .search-form .search-bar::placeholder {
   color: #d3c7c3;
 }
-
 .search-form .search-button {
   padding: 1rem 2rem;
   border-radius: 2rem;
@@ -109,7 +130,7 @@ a {
   fill: currentColor;
   margin-right: 0.3rem;
 }
-
+/* Nav */
 .header .nav-list {
   display: flex;
 }
@@ -119,8 +140,8 @@ a {
   transition: all 0.3s;
 }
 .header .nav-item button svg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   fill: var(--secondary-color);
   margin-right: 0.3rem;
   transform: translateY(-1px);
@@ -128,11 +149,13 @@ a {
 .header .nav-item button:hover {
   background-color: #f2efee;
 }
+/* ----------------------------------------------------- */
 
 .container .content {
   display: flex;
   flex: 1;
 }
+/* ------------------ SEARCH RESULTS ------------------ */
 .content .search-results {
   background-color: white;
   flex: 1;
@@ -166,9 +189,208 @@ a {
   color: #918581;
 }
 
+/* ------------------ RECIPE ------------------ */
 .content .recipe {
   background-color: var(--primary-color);
   flex: 2;
+}
+/* Recipe Fig */
+.recipe .recipe-fig {
+  display: block;
+  height: 20rem;
+  position: relative;
+}
+.recipe-fig::before,
+.recipe-image {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.recipe-fig::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: var(--primary-gradient);
+  opacity: 0.6;
+}
+/* Recipe Title */
+.recipe-title {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%) skewY(-6deg);
+  color: #fff;
+  width: 25rem;
+  font-size: 2.3rem;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.8;
+}
+.recipe-title span {
+  background-image: var(--primary-gradient);
+  padding: 0.8rem 1.2rem;
+  box-decoration-break: clone;
+}
+
+/* Recipe Details */
+.recipe-details {
+  padding: 5rem 4rem 2rem 5rem;
+  display: flex;
+  align-items: center;
+}
+.recipe-details .recipe-info {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  margin-right: 3rem;
+}
+.recipe-details .recipe-info svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 0.5rem;
+  fill: var(--secondary-color);
+  transform: translateY(-2px);
+}
+.recipe-details .recipe-info .recipe-info-number {
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+.recipe-details .recipe-info .servings-buttons-container {
+  margin-left: 1rem;
+  display: flex;
+}
+.recipe-details .recipe-info .servings-buttons-container button {
+  transition: all 0.3s;
+}
+.recipe-details .recipe-info .servings-buttons-container svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.recipe-details .recipe-info .servings-buttons-container button:hover {
+  transform: translateY(-1px);
+}
+.recipe-details .recipe-info .servings-buttons-container button:active {
+  transform: translateY(1px);
+}
+.recipe-details .recipe-user-button {
+  margin-left: auto;
+  background-color: #f2efee;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.recipe-details .recipe-user-button:hover {
+  transform: scale(1.07);
+}
+.recipe-details .recipe-user-button svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: var(--secondary-color);
+}
+.recipe-details .recipe-bookmark-button {
+  background-image: var(--primary-gradient);
+  fill: #fff;
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  transition: all 0.3s;
+}
+.recipe-details .recipe-bookmark-button:hover {
+  transform: scale(1.07);
+}
+.recipe-details .recipe-bookmark-button svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Recipe Ingredients */
+.recipe-ingredients {
+  background-color: #f2efee;
+  padding: 3rem 6rem;
+}
+.ingredients-heading {
+  font-size: 1.3rem;
+  color: #f38e82;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.recipe-ingredients .recipe-ingredients-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2.5rem;
+}
+.recipe-ingredients-list .recipe-ingredient {
+  display: flex;
+}
+.recipe-ingredient svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  flex: 0 0 auto;
+  fill: var(--secondary-color);
+  margin-right: 0.5rem;
+}
+.recipe-ingredient .ingredient-quantity {
+  margin-right: 0.2rem;
+}
+
+/* Recipe Directions */
+.recipe-directions {
+  padding: 3rem 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recipe-directions-text {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #918581;
+}
+.recipe-directions-text span {
+  font-weight: bold;
+}
+.recipe-directions-link {
+  background-image: var(--primary-gradient);
+  padding: 0.7rem 1.5rem;
+  border-radius: 2rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+.recipe-directions-link:hover {
+  scale: 1.05;
+}
+.recipe-directions-link svg {
+  height: 1.2rem;
+  width: 1.2rem;
+  fill: #fff;
+}
+
+/* No Recipe */
+.recipe .no-recipe {
+  display: flex;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  max-width: 25rem;
+  gap: 0.8rem;
+}
+.no-recipe svg {
+  fill: var(--secondary-color);
+  height: 3rem;
+  width: 3rem;
+  transform: translateY(-0.7rem);
+}
+.no-recipe p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 /* Desktop-first (default styles are for desktop, scale down) */

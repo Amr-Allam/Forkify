@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Amr-Allam/Forkify#readme",
   "dependencies": {
+    "core-js": "^3.45.1",
     "normalize.css": "^8.0.1",
-    "parcel": "^2.16.0"
+    "parcel": "^2.16.0",
+    "regenerator-runtime": "^0.14.1"
   }
 }
