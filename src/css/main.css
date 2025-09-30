@@ -18,6 +18,7 @@ body {
   background-image: var(--primary-gradient);
   padding: 3rem;
   min-height: 100dvh;
+  display: flex;
 }
 
 button {
@@ -73,6 +74,7 @@ a {
   border-radius: 9px;
   overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba(97, 85, 81, 0.2);
+  flex: 1;
 }
 /* ------------------ HEADER ------------------ */
 .container .header {
@@ -108,7 +110,7 @@ a {
   min-width: 28ch;
   flex: 1;
   color: #615551;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .search-form .search-bar::placeholder {
   color: #d3c7c3;
