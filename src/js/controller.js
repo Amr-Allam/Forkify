@@ -4,19 +4,18 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
+import searchView from "./views/searchView.js";
 
 // API: https://forkify-api.jonas.io/
 // Demo: https://forkify-v2.jonas.io/
 
 ///////////////////////////////////////
 
-const searchBar = document.querySelector(".search-bar");
 const searchButton = document.querySelector(".search-button");
-const recipesContainer = document.querySelector(".recipes-container");
 
 const controlRecipes = async function (e) {
   e.preventDefault();
-  const searchValue = searchBar.value.toLowerCase();
+  // const searchValue = searchBar.value.toLowerCase();
 
   try {
     const id = window.location.hash.slice(1);
@@ -33,7 +32,21 @@ const controlRecipes = async function (e) {
   }
 };
 
-searchButton.addEventListener("click", controlRecipes);
+const controlSearchReuslts = async function () {
+  try {
+    // Get search query
+    const query = searchView.getQuery();
+    if (!query) return;
+
+    // Load search reuslts
+    await model.loadSearchResults(query);
+
+    // Render results
+    console.log(model.state.search.results);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const showRecipes = function (recipes) {
   recipes.forEach((recipe) => {
@@ -55,5 +68,6 @@ const showRecipes = function (recipes) {
 
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchReuslts);
 };
 init();

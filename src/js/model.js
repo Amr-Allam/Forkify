@@ -3,12 +3,16 @@ import { getJSON } from "./helpers.js";
 
 export const state = {
   recipe: {},
+  search: {
+    query: "",
+    results: [],
+  },
 };
 
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
-    // `https://forkify-api.jonas.io/api/v2/recipes?search=${searchValue}`
+    const data = await getJSON(`${API_URL}${id}`);
+    //
 
     // const { recipes } = data.data;
     // showRecipes(recipes.slice(0, 10));
@@ -25,6 +29,24 @@ export const loadRecipe = async function (id) {
       ingredients: recipe.ingredients,
     };
     console.log(state.recipe);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const loadSearchResults = async function (query) {
+  try {
+    state.search.query = query;
+    const data = await getJSON(`${API_URL}?search=${query}`);
+
+    state.search.results = data.data.recipes.map((recipe) => {
+      return {
+        id: recipe.id,
+        title: recipe.title,
+        publisher: recipe.publisher,
+        image: recipe.image_url,
+      };
+    });
   } catch (err) {
     throw err;
   }
