@@ -162,6 +162,7 @@ a {
   background-color: white;
   flex: 1;
   padding: 2rem 0;
+  min-width: 0;
 }
 .search-results .result {
   padding: 1rem 2rem;
@@ -177,13 +178,17 @@ a {
 .result .result-icon {
   height: 4rem;
   width: 4rem;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .result .result-details {
   text-transform: uppercase;
+  min-width: 0;
 }
 .result-details h4 {
   text-wrap: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
   color: var(--secondary-color);
 }
 .result-details p {
@@ -195,6 +200,7 @@ a {
 .content .recipe {
   background-color: var(--primary-color);
   flex: 2;
+  min-width: 0;
 }
 /* Recipe Fig */
 .recipe .recipe-fig {

@@ -5,11 +5,15 @@ import "regenerator-runtime/runtime";
 import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
+import resultsView from "./views/resultsView.js";
 
 // API: https://forkify-api.jonas.io/
 // Demo: https://forkify-v2.jonas.io/
 
 ///////////////////////////////////////
+if (module.hot) {
+  module.hot.accept();
+}
 
 const searchButton = document.querySelector(".search-button");
 
@@ -34,6 +38,8 @@ const controlRecipes = async function (e) {
 
 const controlSearchReuslts = async function () {
   try {
+    resultsView.renderSpinner();
+
     // Get search query
     const query = searchView.getQuery();
     if (!query) return;
@@ -42,28 +48,10 @@ const controlSearchReuslts = async function () {
     await model.loadSearchResults(query);
 
     // Render results
-    console.log(model.state.search.results);
+    resultsView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
   }
-};
-
-const showRecipes = function (recipes) {
-  recipes.forEach((recipe) => {
-    const html = `
-            <li>
-              <a href="" class="result">
-                <img src="${recipe.image_url}" alt="recipe" class="result-icon" />
-                <div class="result-details">
-                  <h4>${recipe.title}</h4>
-                  <p>${recipe.publisher}</p>
-                </div>
-              </a>
-            </li>
-    `;
-    console.log(recipe.image_url);
-    recipesContainer.insertAdjacentHTML("beforeend", html);
-  });
 };
 
 const init = function () {
