@@ -27,12 +27,3 @@ class ResultsView extends View {
 }
 
 export default new ResultsView();
-const showRecipes = function (recipes) {
-  recipes.forEach((recipe) => {
-    const html = `
-            
-    `;
-    console.log(recipe.image_url);
-    recipesContainer.insertAdjacentHTML("beforeend", html);
-  });
-};

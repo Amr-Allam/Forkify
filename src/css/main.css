@@ -31,6 +31,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s;
 }
 button:focus-visible {
   outline: 2px solid black;
@@ -139,7 +140,6 @@ a {
 .header .nav-item button {
   padding: 2.5rem 0.5rem;
   font-size: 0.9rem;
-  transition: all 0.3s;
 }
 .header .nav-item button svg {
   width: 1.8rem;
@@ -163,6 +163,8 @@ a {
   flex: 1;
   padding: 2rem 0;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .search-results .result {
   padding: 1rem 2rem;
@@ -194,6 +196,33 @@ a {
 .result-details p {
   font-size: 0.8rem;
   color: #918581;
+}
+/* Pagination */
+.search-results .pagination {
+  display: flex;
+  padding: 2rem 2rem 0;
+  margin-top: auto;
+}
+.pagination-button {
+  text-transform: capitalize;
+  display: flex;
+  gap: 0.5rem;
+  background-color: #f9f5f3;
+  padding: 0.55rem 1rem;
+  border-radius: 10rem;
+  color: var(--secondary-color);
+  text-wrap: nowrap;
+}
+.pagination-button:hover {
+  background-color: #f2efee;
+}
+.pagination-button svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: var(--secondary-color);
+}
+.pagination .next-button {
+  margin-left: auto;
 }
 
 /* ------------------ RECIPE ------------------ */
@@ -268,9 +297,6 @@ a {
   margin-left: 1rem;
   display: flex;
 }
-.recipe-details .recipe-info .servings-buttons-container button {
-  transition: all 0.3s;
-}
 .recipe-details .recipe-info .servings-buttons-container svg {
   width: 1.5rem;
   height: 1.5rem;
@@ -286,7 +312,6 @@ a {
   background-color: #f2efee;
   padding: 0.5rem;
   border-radius: 50%;
-  transition: all 0.3s;
 }
 .recipe-details .recipe-user-button:hover {
   transform: scale(1.07);
@@ -302,7 +327,6 @@ a {
   border-radius: 50%;
   padding: 0.5rem;
   margin-left: 1rem;
-  transition: all 0.3s;
 }
 .recipe-details .recipe-bookmark-button:hover {
   transform: scale(1.07);
