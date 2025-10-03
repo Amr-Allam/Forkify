@@ -16,11 +16,8 @@ if (module.hot) {
   module.hot.accept();
 }
 
-const searchButton = document.querySelector(".search-button");
-
 const controlRecipes = async function (e) {
-  e.preventDefault();
-  // const searchValue = searchBar.value.toLowerCase();
+  // e.preventDefault();
 
   try {
     const id = window.location.hash.slice(1);
@@ -28,6 +25,14 @@ const controlRecipes = async function (e) {
 
     if (!id) return;
     recipeView.renderSpinner();
+
+    // Hide results on small screens
+    if (window.innerWidth <= 768) {
+      resultsView.hideResults();
+      recipeView.showRecipe();
+    }
+
+    resultsView.update(model.getSearchResultspage());
 
     await model.loadRecipe(id);
     recipeView.render(model.state.recipe);
@@ -56,6 +61,7 @@ const controlSearchReuslts = async function () {
     paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
+    resultsView.renderError();
   }
 };
 
@@ -67,8 +73,38 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlServings = function (newServings) {
+  // Update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  // Update the recipe view
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
+};
+
+const controlAddBookmark = function () {
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+  recipeView.update(model.state.recipe);
+};
+
+// const controlHideResults = function () {
+//   resultsView.hideResults();
+//   recipeView.showRecipe();
+// };
+
+const controlHideRecipe = function () {
+  recipeView.hideRecipe();
+  resultsView.showResults();
+
+  model.state.recipe = {};
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
+  recipeView.addHandlerBackButton(controlHideRecipe);
   searchView.addHandlerSearch(controlSearchReuslts);
   paginationView.addHandlerClick(controlPagination);
 };

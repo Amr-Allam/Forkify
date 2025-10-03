@@ -14,8 +14,32 @@ class RecipeView extends View {
     );
   }
 
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".update-servings-button");
+      if (!btn) return;
+
+      const updateTo = +btn.dataset.updateTo;
+      if (updateTo > 0) handler(updateTo);
+    });
+  }
+
+  addHandlerAddBookmark(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".recipe-bookmark-button");
+      if (!btn) return;
+      handler();
+    });
+  }
+
   _generateMarkup() {
     return `
+          <button class="back-to-results">
+            <svg class="recipe__info-icon">
+                  <use href="${icons}#icon-arrow-left"></use>
+            </svg>
+            Back
+          </button>
           <figure class="recipe-fig">
             <img
               src="${this._data.image}"
@@ -41,12 +65,16 @@ class RecipeView extends View {
               <span class="recipe-info-number">${this._data.servings}</span
               ><span class="recipe-info-text">Servings</span>
               <div class="servings-buttons-container">
-                <button class="decrease-serving">
+                <button class="decrease-servings update-servings-button" data-update-to="${
+                  this._data.servings - 1
+                }">
                   <svg>
                     <use href="${icons}#icon-minus-circle"></use>
                   </svg>
                 </button>
-                <button class="increase-serving">
+                <button class="increase-servings update-servings-button" data-update-to="${
+                  this._data.servings + 1
+                }">
                   <svg>
                     <use href="${icons}#icon-plus-circle"></use>
                   </svg>
@@ -60,7 +88,9 @@ class RecipeView extends View {
             </button>
             <button class="recipe-bookmark-button">
               <svg>
-                <use href="${icons}#icon-bookmark"></use>
+                <use href="${icons}#icon-bookmark${
+      this._data.bookmarked ? "-fill" : ""
+    }"></use>
               </svg>
             </button>
           </div>
@@ -103,6 +133,20 @@ class RecipeView extends View {
         <div class="ingredient-description">${ing.unit} ${ing.description}</div>
       </li>
               `;
+  }
+
+  addHandlerBackButton(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".back-to-results");
+      if (!btn) return;
+      handler();
+    });
+  }
+  hideRecipe() {
+    this._parentElement.style.display = "none";
+  }
+  showRecipe() {
+    this._parentElement.style.display = "block";
   }
 }
 

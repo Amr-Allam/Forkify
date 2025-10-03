@@ -99,6 +99,7 @@ a {
   border-radius: 2rem;
   max-width: 40rem;
   flex: 1;
+  min-width: 0;
   transition: all 0.3s;
 }
 .header .search-form:focus-within {
@@ -108,7 +109,8 @@ a {
 .search-form .search-bar {
   padding-left: 2rem;
   background: none;
-  min-width: 28ch;
+  /* min-width: 28ch; */
+  min-width: 0;
   flex: 1;
   color: #615551;
   font-size: 1.1rem;
@@ -177,6 +179,9 @@ a {
   background-color: #f9f5f3;
   transform: translateY(-2px);
 }
+.search-results .result-active {
+  background-color: #f9f5f3;
+}
 .result .result-icon {
   height: 4rem;
   width: 4rem;
@@ -203,7 +208,8 @@ a {
   padding: 2rem 2rem 0;
   margin-top: auto;
 }
-.pagination-button {
+.pagination-button,
+.back-to-results {
   text-transform: capitalize;
   display: flex;
   gap: 0.5rem;
@@ -213,10 +219,12 @@ a {
   color: var(--secondary-color);
   text-wrap: nowrap;
 }
-.pagination-button:hover {
+.pagination-button:hover,
+.back-to-results:hover {
   background-color: #f2efee;
 }
-.pagination-button svg {
+.pagination-button svg,
+.back-to-results svg {
   height: 1.5rem;
   width: 1.5rem;
   fill: var(--secondary-color);
@@ -230,6 +238,14 @@ a {
   background-color: var(--primary-color);
   flex: 2;
   min-width: 0;
+  position: relative;
+}
+.recipe .back-to-results {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  display: none;
 }
 /* Recipe Fig */
 .recipe .recipe-fig {
@@ -406,12 +422,14 @@ a {
 }
 
 /* No Recipe */
-.recipe .no-recipe {
-  display: flex;
+.no-recipe {
+  /* display: flex; */
   margin: 0 auto;
   padding: 3rem 2rem;
   max-width: 25rem;
   gap: 0.8rem;
+  justify-content: center;
+  text-align: center;
 }
 .no-recipe svg {
   fill: var(--secondary-color);
@@ -438,8 +456,42 @@ a {
     padding: 0;
   }
 }
+@media (max-width: 60em) {
+  /* ~900px */
+  html {
+    font-size: 85%;
+  }
+}
 @media (max-width: 48em) {
   /* ~768px (big phones / small tablets) */
+  html {
+    font-size: 80%;
+  }
+  .container .header {
+    gap: 1rem;
+  }
+  .search-form .search-button {
+    padding: 1rem;
+  }
+  .search-button span {
+    display: none;
+  }
+  .nav-item button span {
+    display: none;
+  }
+  .recipe {
+    display: none;
+  }
+  .recipe .back-to-results {
+    display: flex;
+  }
+  .recipe-details {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .recipe-details .recipe-user-button {
+    margin-left: 0;
+  }
 }
 @media (max-width: 30em) {
   /* ~480px (phones) */

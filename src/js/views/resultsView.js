@@ -12,10 +12,16 @@ class ResultsView extends View {
   }
 
   _generateMarkupResult(result) {
+    const id = window.location.hash.slice(1);
+
     return `
       <li>
-        <a href="${result.id}" class="result">
-          <img src="${result.image}" alt="${result.title}" class="result-icon" />
+        <a href="#${result.id}" class="result ${
+      result.id === id ? "result-active" : ""
+    }">
+          <img src="${result.image}" alt="${
+      result.title
+    }" class="result-icon" />
           <div class="result-details">
             <h4>${result.title}</h4>
             <p>${result.publisher}</p>
@@ -23,6 +29,18 @@ class ResultsView extends View {
         </a>
       </li>
     `;
+  }
+
+  hideResults() {
+    this._parentElement.parentElement.style.display = "none";
+  }
+  showResults() {
+    window.location.hash = "";
+
+    this._parentElement.parentElement.style.display = "block";
+
+    const activeResult = this._parentElement.querySelector(".result-active");
+    if (activeResult) activeResult.classList.remove("result-active");
   }
 }
 
