@@ -19,6 +19,11 @@ class PreviewView extends View {
             <h4>${this._data.title}</h4>
             <p>${this._data.publisher}</p>
           </div>
+          <div class="recipe-user-icon ${this._data.key ? "" : "hidden"}">
+            <svg>
+              <use href="${icons}#icon-user"></use>
+            </svg>
+          </div>
         </a>
       </li>
     `;
