@@ -168,18 +168,18 @@ a {
   display: flex;
   flex-direction: column;
 }
-.search-results .result {
+.result {
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   transition: all 0.3s;
 }
-.search-results .result:hover {
+.result:hover {
   background-color: #f9f5f3;
   transform: translateY(-2px);
 }
-.search-results .result-active {
+.result-active {
   background-color: #f9f5f3;
 }
 .result .result-icon {
@@ -242,7 +242,7 @@ a {
 }
 .recipe .back-to-results {
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   top: 10px;
   left: 10px;
   display: none;
@@ -270,11 +270,11 @@ a {
 /* Recipe Title */
 .recipe-title {
   position: absolute;
-  bottom: 0;
+  bottom: 2rem;
   left: 50%;
   transform: translate(-50%, 50%) skewY(-6deg);
   color: #fff;
-  width: 25rem;
+  width: 35rem;
   font-size: 2.3rem;
   text-transform: uppercase;
   text-align: center;
@@ -422,7 +422,8 @@ a {
 }
 
 /* No Recipe */
-.no-recipe {
+.message,
+.error {
   /* display: flex; */
   margin: 0 auto;
   padding: 3rem 2rem;
@@ -431,16 +432,37 @@ a {
   justify-content: center;
   text-align: center;
 }
-.no-recipe svg {
+.message svg,
+.error svg {
   fill: var(--secondary-color);
   height: 3rem;
   width: 3rem;
   transform: translateY(-0.7rem);
 }
-.no-recipe p {
+.message p,
+.error p {
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.4;
+}
+
+.nav-item-bookmarks {
+  position: relative;
+}
+.nav-item-bookmarks:hover .bookmarks-container {
+  z-index: 100;
+  opacity: 1;
+}
+.bookmarks-container {
+  position: absolute;
+  top: 100%;
+  right: -2rem;
+  width: 20rem;
+  background-color: #fff;
+  box-shadow: 0 0.8rem 5rem 2rem rgba(97, 85, 81, 0.1);
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.5s 0.2s;
 }
 
 /* Desktop-first (default styles are for desktop, scale down) */

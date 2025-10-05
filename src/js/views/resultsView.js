@@ -1,4 +1,5 @@
 import View from "./View.js";
+import previewView from "./previewView.js";
 import icons from "url:../../img/icons.svg";
 
 class ResultsView extends View {
@@ -8,27 +9,9 @@ class ResultsView extends View {
 
   _generateMarkup() {
     console.log(this._data);
-    return this._data.map(this._generateMarkupResult).join("");
-  }
-
-  _generateMarkupResult(result) {
-    const id = window.location.hash.slice(1);
-
-    return `
-      <li>
-        <a href="#${result.id}" class="result ${
-      result.id === id ? "result-active" : ""
-    }">
-          <img src="${result.image}" alt="${
-      result.title
-    }" class="result-icon" />
-          <div class="result-details">
-            <h4>${result.title}</h4>
-            <p>${result.publisher}</p>
-          </div>
-        </a>
-      </li>
-    `;
+    return this._data
+      .map((result) => previewView.render(result, false))
+      .join("");
   }
 
   hideResults() {

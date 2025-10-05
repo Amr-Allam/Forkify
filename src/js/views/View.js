@@ -3,12 +3,15 @@ import icons from "url:../../img/icons.svg";
 export default class View {
   _data;
 
-  render(data) {
+  render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
+
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
@@ -59,7 +62,7 @@ export default class View {
 
   renderError(message = this._errorMessage) {
     const markup = `
-            <div class="no-recipe">
+            <div class="error">
               <svg>
                 <use href="${icons}#icon-alert-triangle"></use>
               </svg>
@@ -73,7 +76,7 @@ export default class View {
 
   renderMessage(message = this._message) {
     const markup = `
-            <div class="no-recipe">
+            <div class="message">
               <svg>
                 <use href="${icons}#icon-smile"></use>
               </svg>
