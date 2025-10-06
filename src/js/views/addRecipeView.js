@@ -39,6 +39,81 @@ class AddRecipeView extends View {
     });
   }
 
+  renderForm(second) {
+    setTimeout(() => {
+      this._clear();
+      this._parentElement.insertAdjacentHTML(
+        "afterbegin",
+        this._generateFormMarkup()
+      );
+    }, second * 1000);
+  }
+
+  _generateFormMarkup() {
+    return `
+          <div class="upload-column">
+            <h3 class="upload-heading">Recipe Data</h3>
+            <label>Title</label>
+            <input type="text" name="title" required />
+            <label>URL</label>
+            <input type="text" name="sourceURL" required />
+            <label>Image URL</label>
+            <input type="text" name="image" required />
+            <label>Publisher</label>
+            <input type="text" name="publisher" required />
+            <label>Prep time</label>
+            <input type="text" name="cookingTime" required />
+            <label>Servings</label>
+            <input type="text" name="servings" required />
+          </div>
+          <div class="upload-column">
+            <h3 class="upload-heading">Ingredients</h3>
+            <label>Ingredient 1</label>
+            <input
+              type="text"
+              name="ingredient-1"
+              placeholder="Format: 'Quantity, Unit, Description"
+            />
+            <label>Ingredient 2</label>
+            <input
+              type="text"
+              name="ingredient-2"
+              placeholder="Format: 'Quantity, Unit, Description"
+            />
+            <label>Ingredient 3</label>
+            <input
+              type="text"
+              name="ingredient-3"
+              placeholder="Format: 'Quantity, Unit, Description"
+            />
+            <label>Ingredient 4</label>
+            <input
+              type="text"
+              name="ingredient-4"
+              placeholder="Format: 'Quantity, Unit, Description"
+            />
+            <label>Ingredient 5</label>
+            <input
+              type="text"
+              name="ingredient-5"
+              placeholder="Format: 'Quantity, Unit, Description"
+            />
+            <label>Ingredient 6</label>
+            <input
+              type="text"
+              name="ingredient-6"
+              placeholder="Format: 'Quantity, Unit, Description"
+            />
+          </div>
+          <button class="upload-button">
+            <svg>
+              <use href="${icons}#icon-upload-cloud"></use>
+            </svg>
+            Upload
+          </button>
+          `;
+  }
+
   _generateMarkup() {}
 }
 

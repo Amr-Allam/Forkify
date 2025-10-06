@@ -15,14 +15,10 @@ import addRecipeView from "./views/addRecipeView.js";
 // Demo: https://forkify-v2.jonas.io/
 
 ///////////////////////////////////////
-if (module.hot) {
-  module.hot.accept();
-}
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    console.log(id);
+    // console.log(id);
 
     if (!id) return;
     recipeView.renderSpinner();
@@ -46,7 +42,7 @@ const controlRecipes = async function () {
     recipeView.render(model.state.recipe);
   } catch (err) {
     console.error(err);
-    recipeView.renderError();
+    recipeView.renderError(err.message);
   }
 };
 
@@ -69,7 +65,7 @@ const controlSearchReuslts = async function () {
     paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
-    resultsView.renderError();
+    resultsView.renderError(err.message);
   }
 };
 
@@ -120,13 +116,22 @@ const controlAddRecipe = async function (newRecipe) {
 
     // Upload new recipe data
     await model.uploadRecipe(newRecipe);
-    console.log(model.state.recipe);
+    // console.log(model.state.recipe);
 
     // Render recipe
     recipeView.render(model.state.recipe);
 
+    // Hide results on small screens
+    if (window.innerWidth <= 768) {
+      resultsView.hideResults();
+      recipeView.showRecipe();
+    }
+
     // Success message
     addRecipeView.renderMessage();
+
+    // Render Form
+    addRecipeView.renderForm(3);
 
     // render bookmarks view
     bookmarksView.render(model.state.bookmarks);
@@ -141,6 +146,7 @@ const controlAddRecipe = async function (newRecipe) {
   } catch (err) {
     console.error(err);
     addRecipeView.renderError(err.message);
+    addRecipeView.renderForm(3);
   }
 };
 

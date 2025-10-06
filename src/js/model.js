@@ -36,7 +36,7 @@ export const loadRecipe = async function (id) {
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
 
-    console.log(state.recipe);
+    // console.log(state.recipe);
   } catch (err) {
     throw err;
   }
@@ -114,7 +114,7 @@ init();
 const clearBookmarks = function () {
   localStorage.clear("bookmarks");
 };
-// clearBookmarks();
+clearBookmarks();
 
 export const uploadRecipe = async function (newRecipe) {
   try {
@@ -139,7 +139,7 @@ export const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients,
     };
-    console.log(recipe);
+    // console.log(recipe);
 
     const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
     state.recipe = createRecipeObject(data);

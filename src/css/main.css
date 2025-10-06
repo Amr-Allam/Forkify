@@ -580,6 +580,9 @@ a {
   html {
     font-size: 85%;
   }
+  .recipe-details {
+    padding: 5rem 2rem 2rem 3rem;
+  }
 }
 @media (max-width: 48em) {
   /* ~768px (big phones / small tablets) */
